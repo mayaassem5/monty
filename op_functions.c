@@ -40,3 +40,36 @@ void pall(stack_t **stack, unsigned int line_num)
 		tmp = tmp->next;
 	}
 }
+
+/**
+ ** pint - pint
+ ** @stack: struct
+ ** @line_num: line
+ **/
+void pint(stack_t **stack, unsigned int line_num)
+{
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*stack)->n);
+}
+
+void pop(stack_t **stack, unsigned int line_num)
+{
+	stack_t *tmp = *stack;
+
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+	
+	tmp = *stack;
+	*stack = tmp->next;
+	if (*stack)
+		(*stack)->prev = NULL;
+	free(tmp);
+}
+
