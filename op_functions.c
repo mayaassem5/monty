@@ -7,7 +7,7 @@
 void push(stack_t **stack, unsigned int line_num)
 {
 	stack_t *newnode;
-	(void)line_number;
+	(void)line_num;
 
 	newnode = malloc(sizeof(stack_t));
 	if (newnode == NULL)
@@ -20,6 +20,6 @@ void push(stack_t **stack, unsigned int line_num)
 	newnode->next = *stack;
 	newnode->prev = NULL;
 	if (*stack)
-		stack->prev = newnode;
+		(*stack)->prev = newnode;
 	*stack = newnode;
 }

@@ -1,11 +1,10 @@
 #include "monty.h"
 /**
- *  * free_stack - free
- *   * @stack: struct
- *    *
- *     */
-
-void free_stack(stack_t *stack)
+ ** freestack - free
+ ** @stack: struct
+ **
+ **/
+void freestack(stack_t *stack)
 {
 	stack_t *tmp;
 

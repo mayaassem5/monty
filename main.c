@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 	free(line);
 	fclose(file);
 	freestack(stack);
-	return (EXIT_SUCESS);
+	return (EXIT_SUCCESS);
 }
 
 /**
@@ -56,7 +56,7 @@ void process(char *line, unsigned int line_num, stack_t **stack)
 	void (*func)(stack_t **, unsigned int);
 
 	opcd = strtok(line, " \n\t");
-	if (opcd == NULL ||opcd[0] == "#")
+	if (opcd == NULL || opcd[0] == '#')
 		return;
 
 	if (strcmp(opcd, "push") == 0)
