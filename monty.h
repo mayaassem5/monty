@@ -66,6 +66,7 @@ void pint(stack_t **stack, unsigned int line_num);
 void pop(stack_t **stack, unsigned int line_num);
 void swap(stack_t **stack, unsigned int line_num);
 void add(stack_t **stack, unsigned int line_num);
+void nop(stack_t **stack, unsigned int line_num);
 void process(char *line, unsigned int line_num, stack_t **stack);
 
 #endif

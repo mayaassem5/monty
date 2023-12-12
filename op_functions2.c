@@ -21,3 +21,14 @@ void add(stack_t **stack, unsigned int line_num)
 	(*stack)->prev = temp->prev;
 	free(temp);
 }
+
+/**
+ ** nop - nop
+ ** @stack: struct
+ ** @line_num: line
+ **/
+void nop(stack_t **stack, unsigned int line_num)
+{
+	(void) stack;
+	(void) line_num;
+}
