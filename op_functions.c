@@ -56,6 +56,11 @@ void pint(stack_t **stack, unsigned int line_num)
 	printf("%d\n", (*stack)->n);
 }
 
+/**
+ ** pop - pop
+ ** @stack: struct
+ ** @line_num: line
+ **/
 void pop(stack_t **stack, unsigned int line_num)
 {
 	stack_t *tmp = *stack;
@@ -73,3 +78,30 @@ void pop(stack_t **stack, unsigned int line_num)
 	free(tmp);
 }
 
+/**
+ ** swap - swap
+ ** @stack: struct
+ ** @line_num: line
+ **
+ **/
+void swap(stack_t **stack, unsigned int line_num)
+{
+	stack_t *tmp;
+
+	if (!(*stack) || !(*stack)->next)
+	{
+		fprintf(stderr, "L%u: can't swap, stack too short\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+
+	tmp = (*stack)->next;
+	(*stack)->next = tmp->next;
+	tmp->next = *stack;
+	(*stack)->prev = tmp;
+
+	if ((*stack)->next)
+		(*stack)->next->prev = *stack;
+
+	*stack = tmp;
+	tmp->prev = NULL;
+}
