@@ -10,6 +10,7 @@ void (*get_func(char *opcd))(stack_t **, unsigned int)
 
 	instruction_t op[] = {
 		{"push", push},
+		{"pall", pall},
 		{NULL, NULL}
 	};
 

@@ -61,6 +61,7 @@ typedef struct instruction_s
 void freestack(stack_t *stack);
 void(*get_func(char *opcd))(stack_t **, unsigned int);
 void push(stack_t **stack, unsigned int line_num);
+void pall(stack_t **stack, unsigned int line_num);
 void process(char *line, unsigned int line_num, stack_t **stack);
 
 #endif
