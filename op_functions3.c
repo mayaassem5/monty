@@ -50,3 +50,28 @@ void pchar(stack_t **stack, unsigned int line_num)
 
 	printf("%c\n", (*stack)->n);
 }
+
+/**
+ ** pstr - prints
+ ** @stack: stack
+ ** @line_num: line num
+ ** Return: nothing
+ **/
+void pstr(stack_t **stack, unsigned int line_num)
+{
+	stack_t *tmp = *stack;
+
+	(void)line_num;
+	if (tmp == NULL)
+	{
+		putchar('\n');
+		return;
+	}
+
+	while (tmp && (tmp->n < 128 && tmp->n > 0))
+	{
+		fprintf(stdout, "%c", tmp->n);
+		tmp = tmp->prev;
+	}
+	putchar('\n');
+}
