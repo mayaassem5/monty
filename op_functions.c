@@ -36,7 +36,7 @@ void pall(stack_t **stack, unsigned int line_num)
 
 	while (tmp != NULL)
 	{
-		fprintf(stdout, "%d\n", temp->n);
+		fprintf(stdout, "%d\n", tmp->n);
 		tmp = tmp->prev;
 	}
 }
