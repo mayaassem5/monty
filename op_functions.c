@@ -17,10 +17,10 @@ void push(stack_t **stack, unsigned int line_num)
 	}
 
 	newnode->n = globals.value;
-	newnode->next = *stack;
-	newnode->prev = NULL;
+	newnode->prev = *stack;
+	newnode->next = NULL;
 	if (*stack)
-		(*stack)->prev = newnode;
+		(*stack)->next = newnode;
 	*stack = newnode;
 }
 
