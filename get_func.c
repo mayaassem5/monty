@@ -20,6 +20,7 @@ fun get_func(char *opcd)
 		{"div", divide},
 		{"mul", mul},
 		{"mod", mod},
+		{"pchar", pchar},
 		{NULL, NULL}
 	};
 
