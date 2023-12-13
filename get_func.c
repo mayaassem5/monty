@@ -17,6 +17,7 @@ fun get_func(char *opcd)
 		{"add", add},
 		{"nop", nop},
 		{"sub", sub},
+		{"div", divide},
 		{NULL, NULL}
 	};
 
