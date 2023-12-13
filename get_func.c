@@ -16,6 +16,7 @@ fun get_func(char *opcd)
 		{"swap", swap},
 		{"add", add},
 		{"nop", nop},
+		{"sub", sub},
 		{NULL, NULL}
 	};
 
