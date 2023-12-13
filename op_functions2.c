@@ -84,3 +84,26 @@ void divide(stack_t **stack, unsigned int line_num)
 	(*stack)->next = NULL;
 	free(tmp);
 }
+
+/**
+ ** mul - mul
+ ** @stack: stack
+ ** @line_num: line
+ **
+ **/
+void mul(stack_t **stack, unsigned int line_num)
+{
+	stack_t *tmp;
+
+	if(!(*stack) || !(*stack)->prev)
+	{
+		fprintf(stderr, "L%u: can't mul, stack too short\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+
+	tmp = *stack;
+	(*stack) = (*stack)->prev;
+	(*stack)->n *= tmp->n;
+	(*stack)->next = NULL;
+	free(tmp);
+}

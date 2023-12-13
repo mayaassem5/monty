@@ -18,6 +18,7 @@ fun get_func(char *opcd)
 		{"nop", nop},
 		{"sub", sub},
 		{"div", divide},
+		{"mul", mul},
 		{NULL, NULL}
 	};
 
