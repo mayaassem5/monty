@@ -107,3 +107,4 @@ void mul(stack_t **stack, unsigned int line_num)
 	(*stack)->next = NULL;
 	free(tmp);
 }
+
