@@ -23,6 +23,7 @@ void (*get_func(char *opcd))(stack_t **, unsigned int)
 	{
 		if (strcmp(opcd, op[i].opcode) == 0)
 			return (op[i].f);
+		i++;
 	}
 	return (NULL);
 }
