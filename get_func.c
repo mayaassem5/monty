@@ -4,7 +4,7 @@
  ** @opcd: opcd
  ** Return: get the op
  **/
-void (*get_func(char *opcd))(stack_t **, unsigned int)
+fun get_func(char *opcd)
 {
 	int i = 0;
 
@@ -19,11 +19,22 @@ void (*get_func(char *opcd))(stack_t **, unsigned int)
 		{NULL, NULL}
 	};
 
-	while (op[i].opcode != NULL)
+	while (op[i].f != NULL)
 	{
 		if (strcmp(opcd, op[i].opcode) == 0)
 			return (op[i].f);
 		i++;
 	}
 	return (NULL);
+}
+
+/**
+ ** is_empty - check if the stack is empty
+ ** @stack: stack
+ **
+ ** Return: 1 if empty, 0 if not
+ **/
+int is_empty(stack_t *stack)
+{
+		return (stack == NULL);
 }

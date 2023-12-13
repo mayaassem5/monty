@@ -1,20 +1,14 @@
 #include "monty.h"
 
+static int arg;
 /**
  ** main - Entry
  ** @argc: argc
  ** @argv: argv
  ** Return: always 0
  **/
-global_vars_t globals;
-
 int main(int argc, char *argv[])
 {
-	FILE *file = NULL;
-	char *line = NULL;
-	size_t len = 0;
-	ssize_t read;
-	unsigned int line_num = 0;
 	stack_t *stack = NULL;
 
 	if(argc != 2)
@@ -23,63 +17,125 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	file = fopen(argv[1], "r");
+	readf(argv[1], &stack);
 
-	if(file == NULL)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
-
-	while((read = getline(&line, &len, file)) != -1)
-	{
-		line_num++;
-		process(line, line_num, &stack);
-
-	}
-
-	free(line);
-	fclose(file);
-	freestack(stack);
-	return (EXIT_SUCCESS);
+	if (!is_empty(stack))
+		freestack(stack);
+	
+	return (0);
 }
 
 /**
- ** process - process
- ** @line: line
- ** @line_num: line num
- ** @stack: data structure
+ ** read - read file
+ ** @fname: filename
+ ** @stack: stack
+ **
+ ** Return: nothing
  **/
-void process(char *line, unsigned int line_num, stack_t **stack)
+void readf(char *fname, stack_t **stack)
 {
-	char *opcd = NULL, *arg = NULL;
-	void (*func)(stack_t **, unsigned int);
+	size_t len = 0;
+	ssize_t lread = 0;
+	char *opcd = NULL, *line = NULL;
+	int line_num = 1;
+	fun func;
+	FILE *file;
 
-	opcd = strtok(line, " \n\t");
-	if (opcd == NULL || opcd[0] == '#')
-		return;
+	file = fopen(fname, "r");
+	if (file == NULL)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", fname);
+		exit(EXIT_FAILURE);
+	}
+
+	line = NULL;
+	while ((lread = getline(&line, &len, file)) != -1)
+	{
+		opcd = parse(line_num, line);
+		if (opcd == NULL || opcd[0] == '#')
+		{
+			line_num++;
+			continue;
+		}
+		
+		func = get_func(opcd);
+		if (func == NULL)
+		{
+			fprintf(stderr, "L%d: unknown instruction %s\n", line_num, opcd);
+			exit(EXIT_FAILURE);
+		}
+
+		func(stack, line_num);
+		line_num++;
+	}
+	free(line);
+	fclose(file);
+}
+
+/**
+ ** parse - parse line
+ ** @linenum: linenum
+ ** @line: line
+ **
+ ** Return: opcd or NULL
+ **/
+char *parse(int linenum, char *line)
+{
+	char *opcd = NULL;
+	char *argu = NULL;
+
+	opcd = strtok(line, " \n");
+	if (opcd == NULL)
+		return (NULL);
 
 	if (strcmp(opcd, "push") == 0)
 	{
-		arg = strtok(NULL, " \n\t");
-		if (arg == NULL)
+		argu = strtok(NULL, " \n");
+		if (argu != NULL && is_num(argu))
 		{
-			fprintf(stderr, "L%d: usage: push integer\n", line_num);
-			free(line);
-			freestack(*stack);
+			arg = atoi(argu);
+		}
+		else
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", linenum);
 			exit(EXIT_FAILURE);
 		}
-		globals.value = atoi(arg);
 	}
-	func = get_func(opcd);
-	if (func != NULL)
-		func(stack, line_num);
-	else
-	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", line_num, opcd);
-		free(line);
-		freestack(*stack);
-		exit(EXIT_FAILURE);
-	}
+	return (opcd);
 }
 
+/**
+ ** is_num - is a number
+ ** @str: string
+ **
+ ** Return: 1 if number 0 if not
+ **/
+int is_num(char *str)
+{
+	int i = 0;
+
+	if (str == NULL)
+		return (0);
+
+	while (str[i] != '\0')
+	{
+		if (str[0] == '-')
+		{
+			i++;
+			continue;
+		}
+		if (str[i] < 48 || str[i] > 57)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+/**
+ ** get_arg - return the arg variable
+ ** Return: arg value
+ **/
+int get_arg(void)
+{
+	return (arg);
+}
