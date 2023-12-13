@@ -85,20 +85,16 @@ void pop(stack_t **stack, unsigned int line_num)
  **/
 void swap(stack_t **stack, unsigned int line_num)
 {
-	stack_t *tmp;
+	int tmp;
 
-	if (!(*stack) || !(*stack)->next)
+	if (!(*stack) || !(*stack)->prev)
 	{
 		fprintf(stderr, "L%u: can't swap, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
 	}
 
-	tmp = (*stack)->prev;
-	(*stack)->next = tmp;
-	tmp->next = NULL;
-	(*stack)->prev = tmp->prev;
-	tmp->prev = *stack
-
-	*stack = tmp;
+	tmp = (*stack)->n;
+	(*stack)->n = (*stack)->prev->n;
+	(*stack)->prev->n = tmp;
 }
 
