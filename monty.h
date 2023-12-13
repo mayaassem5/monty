@@ -44,7 +44,7 @@ typedef struct instruction_s
 } instruction_t;
 
 void readf(char *fname, stack_t **stack);
-void freestack(stack_t *stack);
+void freestack(stack_t **stack);
 char *parse(int linenum, char *line);
 int is_num(char *str);
 int get_arg(void);

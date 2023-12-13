@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 	readf(argv[1], &stack);
 
 	if (!is_empty(stack))
-		freestack(stack);
+		freestack(&stack);
 	
 	return (0);
 }
