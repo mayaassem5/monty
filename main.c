@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 {
 	stack_t *stack = NULL;
 
-	if(argc != 2)
+	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
@@ -21,12 +21,12 @@ int main(int argc, char *argv[])
 
 	if (!is_empty(stack))
 		freestack(&stack);
-	
+
 	return (0);
 }
 
 /**
- ** read - read file
+ ** readf - read file
  ** @fname: filename
  ** @stack: stack
  **
@@ -57,7 +57,7 @@ void readf(char *fname, stack_t **stack)
 			line_num++;
 			continue;
 		}
-		
+
 		func = get_func(opcd);
 		if (func == NULL)
 		{
@@ -139,3 +139,4 @@ int get_arg(void)
 {
 	return (arg);
 }
+

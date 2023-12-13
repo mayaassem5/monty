@@ -19,3 +19,4 @@ void freestack(stack_t **stack)
 		tmp = NULL;
 	}
 }
+
