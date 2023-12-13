@@ -75,3 +75,59 @@ void pstr(stack_t **stack, unsigned int line_num)
 	}
 	putchar('\n');
 }
+
+/**
+ ** rotl - print
+ ** @stack: stack
+ ** @line_num: line num
+ ** Return: nothing
+ **/
+void rotl(stack_t **stack, unsigned int line_num)
+{
+	stack_t *tmp = NULL, *first = NULL;
+
+	(void)line_num;
+
+	if (*stack == NULL || (*stack)->prev == NULL)
+		return;
+
+	first = *stack;
+	*stack = (*stack)->prev;
+	(*stack)->next = NULL;
+	first->prev = NULL;
+	first->next = NULL;
+	tmp = *stack;
+
+	while (tmp->prev != NULL)
+		tmp = tmp->prev;
+
+	tmp->prev = first;
+	first->next = tmp;
+}
+
+/**
+ ** rotr - prints
+ ** @stack: stack
+ ** @line_num: line num
+ ** Return: nothing
+ **/
+void rotr(stack_t **stack, unsigned int line_num)
+{
+	stack_t *tmp = NULL, *first = *stack, *last = NULL;
+	(void)line_num;
+
+	if (*stack == NULL || (*stack)->prev == NULL)
+		return;
+
+	tmp = *stack;
+
+	while (tmp->prev->prev != NULL)
+		tmp = tmp->prev;
+
+	last = tmp->prev;
+	last->next = NULL;
+	tmp->prev = NULL;
+	last->prev = first;
+	first->next = last;
+	*stack = last;
+}
